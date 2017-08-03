@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Medicine Time</string>
+    <string name="title_medicine_name">Medicine Name</string>
+    <string name="hint_enter_med_name">Enter Medicine</string>
+    <string name="medicine_days">Medicine Days</string>
+    <string name="title_treatment_deadline">Treatment deadline</string>
+    <string name="title_continuous_use">Continuous use</string>
+    <string name="title_reminder">Reminder</string>
+    <string name="new_medicine">NEW MEDICINE</string>
+    <string name="every_day">Every day</string>
+    <string name="no_medicine_added">No Medicine Added</string>
+    <string name="loading_tasks_error">Error while loading medicineAlarms</string>
+    <string name="successfully_saved_me_message">Medicine Added Scuccessfully</string>
+    <string name="reminder_message">It\'s Time to take your medicine</string>
+    <string name="ignored">IGNORED</string>
+    <string name="taken">TAKEN</string>
+    <string name="all">ALL</string>
+    <string name="menu_filter">Filter</string>
+    <string name="all_label">All Medicines</string>
+    <string name="ignore_label">Medicines Ignored</string>
+    <string name="taken_label">Medicine Taken</string>
+    <string name="no_history">No History Found</string>
+    <string name="no_taken_med_history">You have not taken any medicine</string>
+    <string name="no_ignored_history">Well Done</string>
+    <string name="menu_stats">Monthly Report</string>
+</resources>

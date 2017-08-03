@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/medicine_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <ProgressBar
+        android:id="@+id/progressLoader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:id="@+id/no_med_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/noMedIcon"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center"
+            android:contentDescription="@null"
+            android:src="@drawable/icon_my_health" />
+
+        <com.gautam.medicinetime.views.RobotoLightTextView
+            android:id="@+id/noMedText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/list_item_padding"
+            android:text="@string/no_medicine_added" />
+
+        <TextView
+            android:id="@+id/add_med_now"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_gravity="center"
+            android:background="@drawable/touch_feedback"
+            android:gravity="center"
+            android:text="Add Now" />
+
+    </LinearLayout>
+</RelativeLayout>

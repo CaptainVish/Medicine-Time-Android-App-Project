@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="two_dp">2dp</dimen>
+    <dimen name="four_dp">4dp</dimen>
+    <dimen name="eight_dp">8dp</dimen>
+    <dimen name="sixteen_dp">16dp</dimen>
+    <dimen name="text_medium">14sp</dimen>
+    <dimen name="text_large">17sp</dimen>
+    <dimen name="list_item_padding">8dp</dimen>
+</resources>

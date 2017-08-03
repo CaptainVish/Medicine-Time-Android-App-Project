@@ -1,0 +1,72 @@
+apply plugin: 'com.android.application'
+
+android {
+    signingConfigs {
+        config {
+            keyAlias 'medicine'
+            keyPassword 'test123'
+            storeFile file('/Users/gautam/Documents/Projects/MedicineTime/app/medicine')
+            storePassword 'test123'
+        }
+    }
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+    defaultConfig {
+        applicationId "com.gautam.medicinetime"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
+        signingConfig signingConfigs.config
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
+            pseudoLocalesEnabled true
+            proguardFile '/Users/gautam/Documents/Projects/MedicineTime/app/proguard-rules.pro'
+        }
+    }
+    flavorDimensions "default"
+    // If you need to add more flavors, consider using flavor dimensions.
+    productFlavors {
+        mock {
+            applicationIdSuffix = ".mock"
+            dimension "default"
+        }
+        prod {
+            dimension "default"
+            signingConfig signingConfigs.config
+        }
+    }
+    // Remove mockRelease as it's not needed.
+    android.variantFilter { variant ->
+        if (variant.buildType.name.equals('release')
+                && variant.getFlavors().get(0).name.equals('mock')) {
+            variant.setIgnore(true);
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    androidTestImplementation "junit:junit:$rootProject.ext.junitVersion"
+    implementation "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"
+    implementation "com.android.support:cardview-v7:$rootProject.supportLibraryVersion"
+    implementation "com.android.support:design:$rootProject.supportLibraryVersion"
+    implementation "com.android.support:recyclerview-v7:$rootProject.supportLibraryVersion"
+    implementation "com.android.support:support-v4:$rootProject.supportLibraryVersion"
+    implementation "com.github.sundeepk:compact-calendar-view:$rootProject.compactCalendarViewVersion"
+    implementation "com.jakewharton:butterknife:$rootProject.butterKniferVersion"
+    annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.butterKniferVersion"
+}

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/coordinatorLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="180dp">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            style="@style/ToolbarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:layout_collapseMode="pin"
+            app:navigationIcon="@drawable/ic_clear"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:maxLines="2"
+            android:paddingLeft="@dimen/sixteen_dp"
+            android:paddingRight="@dimen/sixteen_dp"
+            android:text="@string/reminder_message"
+            android:textColor="@android:color/white"
+            android:textSize="30sp" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <FrameLayout
+        android:id="@+id/contentFrame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+</android.support.design.widget.CoordinatorLayout>

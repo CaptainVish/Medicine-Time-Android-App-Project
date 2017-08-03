@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:orientation="vertical"
+    app:cardElevation="2dp"
+    app:cardUseCompatPadding="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/sixteen_dp"
+            android:paddingLeft="@dimen/sixteen_dp"
+            android:paddingRight="@dimen/sixteen_dp"
+            android:paddingTop="@dimen/sixteen_dp">
+
+            <com.gautam.medicinetime.views.RobotoBoldTextView
+                android:id="@+id/tv_med_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#4d4d4d"
+                android:textSize="24sp"
+                tools:text="23:20" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#E0E0E0" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/eight_dp"
+            android:paddingLeft="@dimen/sixteen_dp"
+            android:paddingRight="@dimen/sixteen_dp"
+            android:paddingTop="@dimen/eight_dp">
+
+            <ImageView
+                android:id="@+id/iv_icon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="@null"
+                android:src="@drawable/icon_blister" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_toEndOf="@+id/iv_icon"
+                android:layout_toLeftOf="@+id/iv_medicine_action"
+                android:layout_toRightOf="@+id/iv_icon"
+                android:layout_toStartOf="@+id/iv_medicine_action"
+                android:orientation="vertical"
+                android:padding="4dp">
+
+                <com.gautam.medicinetime.views.RobotoBoldTextView
+                    android:id="@+id/tv_medicine_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#4d4d4d"
+                    tools:text="Paracetamol" />
+
+                <com.gautam.medicinetime.views.RobotoRegularTextView
+                    android:id="@+id/tv_dose_details"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:text="1.0 adhesive(s)" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/iv_medicine_action"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="@null"
+                android:src="@drawable/image_reminder_taken"
+                android:visibility="visible" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>
