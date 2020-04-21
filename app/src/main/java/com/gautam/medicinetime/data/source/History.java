@@ -22,10 +22,12 @@ public class History {
 
     private String doseUnit;
 
+    private  int alarmId;
+
     public History() {
     }
 
-    public History(int hourTaken, int minuteTaken, String dateString, String pillName, int action, String doseQuantity, String doseUnit) {
+    public History(int hourTaken, int minuteTaken, String dateString, String pillName, int action, String doseQuantity, String doseUnit, int alarmId) {
         this.hourTaken = hourTaken;
         this.minuteTaken = minuteTaken;
         this.dateString = dateString;
@@ -33,6 +35,7 @@ public class History {
         this.action = action;
         this.doseQuantity = doseQuantity;
         this.doseUnit = doseUnit;
+        this.alarmId = alarmId;
     }
 
     public void setDoseUnit(String doseUnit) {
@@ -93,6 +96,14 @@ public class History {
 
     public void setAction(int action) {
         this.action = action;
+    }
+
+    public int getAlarmId() {
+        return alarmId;
+    }
+
+    public void setAlarmId(int alarmId) {
+        this.alarmId = alarmId;
     }
 
     /**

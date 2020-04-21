@@ -19,7 +19,7 @@
             android:layout_marginTop="@dimen/sixteen_dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_history_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />

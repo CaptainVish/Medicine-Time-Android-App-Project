@@ -1,6 +1,6 @@
 package com.gautam.medicinetime.data.source;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import java.util.List;
 
@@ -88,7 +88,7 @@ public class MedicineRepository implements MedicineDataSource {
 
     @Override
     public List<Long> tempIds() {
-        return null;
+        return localDataSource.tempIds();
     }
 
     @Override
@@ -99,6 +99,11 @@ public class MedicineRepository implements MedicineDataSource {
     @Override
     public List<MedicineAlarm> getMedicineByPillName(String pillName) {
         return localDataSource.getMedicineByPillName(pillName);
+    }
+
+    @Override
+    public List<MedicineAlarm> getAllAlarms(String pillName) {
+        return localDataSource.getAllAlarms(pillName);
     }
 
     @Override

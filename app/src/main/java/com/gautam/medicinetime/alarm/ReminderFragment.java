@@ -5,8 +5,8 @@ import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Vibrator;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,7 +71,7 @@ public class ReminderFragment extends Fragment implements ReminderContract.View 
 
     private ReminderContract.Presenter presenter;
 
-    public static ReminderFragment newInstance(long id) {
+    static ReminderFragment newInstance(long id) {
         Bundle args = new Bundle();
         args.putLong(EXTRA_ID, id);
         ReminderFragment fragment = new ReminderFragment();

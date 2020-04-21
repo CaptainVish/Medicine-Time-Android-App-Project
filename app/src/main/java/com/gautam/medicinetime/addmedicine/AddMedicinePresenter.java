@@ -1,6 +1,6 @@
 package com.gautam.medicinetime.addmedicine;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.gautam.medicinetime.data.source.MedicineAlarm;
 import com.gautam.medicinetime.data.source.MedicineDataSource;

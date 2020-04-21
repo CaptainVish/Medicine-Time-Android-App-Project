@@ -1,7 +1,6 @@
 package com.gautam.medicinetime.data;
 
-
-import android.support.annotation.VisibleForTesting;
+import androidx.annotation.VisibleForTesting;
 
 import com.gautam.medicinetime.data.source.History;
 import com.gautam.medicinetime.data.source.MedicineAlarm;
@@ -16,6 +15,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Random;
 
 
 /**
@@ -52,22 +52,23 @@ public class FakeMedicineLocalDataSource implements MedicineDataSource {
 
         addPills("Paracetamol", 1);
         addPills("Crocin", 2);
+        int alarmId = new Random().nextInt(100);
+        addMedicine(1, hour, minute, "Paracetamol", "1.0", "tablet(s)", alarmId);
+        addMedicine(2, hour + 2, minute + 1, "Crocin", "2.0", "capsule(s)", alarmId);
 
-        addMedicine(1, hour, minute, "Paracetamol", "1.0", "tablet(s)");
-        addMedicine(2, hour + 2, minute + 1, "Crocin", "2.0", "capsule(s)");
-
-        addHistory(hour, minute, dateString, "Crocin", 2, "2.0", "capsule(s)");
-        addHistory(hour + 2, minute + 1, dateString, "Paracetamol", 1, "1.0", "tablet(s)");
+        addHistory(hour, minute, dateString, "Crocin", 2, "2.0", "capsule(s)", alarmId);
+        addHistory(hour + 2, minute + 1, dateString, "Paracetamol", 1, "1.0", "tablet(s)", alarmId);
     }
 
 
-    private static void addMedicine(long id, int hour, int minute, String pillName, String doseQuantity, String doseUnit) {
-        MedicineAlarm medicineAlarm = new MedicineAlarm(id, hour, minute, pillName, doseQuantity, doseUnit);
+    private static void addMedicine(long id, int hour, int minute, String pillName, String doseQuantity, String doseUnit, int alarmId) {
+
+        MedicineAlarm medicineAlarm = new MedicineAlarm(id, hour, minute, pillName, doseQuantity, doseUnit, alarmId);
         MEDICINE_SERVICE_DATA.put(String.valueOf(id), medicineAlarm);
     }
 
-    private static void addHistory(int hourTaken, int minuteTaken, String dateString, String pillName, int action, String doseQuantity, String doseUnit) {
-        History history = new History(hourTaken, minuteTaken, dateString, pillName, action, doseQuantity, doseUnit);
+    private static void addHistory(int hourTaken, int minuteTaken, String dateString, String pillName, int action, String doseQuantity, String doseUnit, int alarmId) {
+        History history = new History(hourTaken, minuteTaken, dateString, pillName, action, doseQuantity, doseUnit, alarmId);
         HISTORY_SERVICE_DATA.put(pillName, history);
     }
 
@@ -134,6 +135,18 @@ public class FakeMedicineLocalDataSource implements MedicineDataSource {
 
     @Override
     public List<MedicineAlarm> getMedicineByPillName(String pillName) {
+        List<MedicineAlarm> medicineAlarms = new ArrayList<>();
+        for (Map.Entry<String, MedicineAlarm> entry : MEDICINE_SERVICE_DATA.entrySet()) {
+            MedicineAlarm medicineAlarm = entry.getValue();
+            if (medicineAlarm.getPillName().equalsIgnoreCase(pillName)) {
+                medicineAlarms.add(medicineAlarm);
+            }
+        }
+        return medicineAlarms;
+    }
+
+    @Override
+    public List<MedicineAlarm> getAllAlarms(String pillName) {
         List<MedicineAlarm> medicineAlarms = new ArrayList<>();
         for (Map.Entry<String, MedicineAlarm> entry : MEDICINE_SERVICE_DATA.entrySet()) {
             MedicineAlarm medicineAlarm = entry.getValue();

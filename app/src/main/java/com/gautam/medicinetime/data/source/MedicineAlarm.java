@@ -1,6 +1,6 @@
 package com.gautam.medicinetime.data.source;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import java.util.Collections;
 import java.util.LinkedList;
@@ -27,18 +27,20 @@ public class MedicineAlarm implements Comparable<MedicineAlarm> {
 
     private String dateString;
 
+    private  int alarmId;
 
     public MedicineAlarm() {
 
     }
 
-    public MedicineAlarm(long id, int hour, int minute, String pillName, String doseQuantity, String doseUnit) {
+    public MedicineAlarm(long id, int hour, int minute, String pillName, String doseQuantity, String doseUnit, int alarmId) {
         this.id = id;
         this.hour = hour;
         this.minute = minute;
         this.pillName = pillName;
         this.doseQuantity = doseQuantity;
         this.doseUnit = doseUnit;
+        this.alarmId = alarmId;
     }
 
     public String getDateString() {
@@ -67,7 +69,7 @@ public class MedicineAlarm implements Comparable<MedicineAlarm> {
 
     private List<Long> ids = new LinkedList<Long>();
 
-    private boolean dayOfWeek[] = new boolean[7];
+    private boolean[] dayOfWeek = new boolean[7];
 
     public long getId() {
         return id;
@@ -75,6 +77,14 @@ public class MedicineAlarm implements Comparable<MedicineAlarm> {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public int getAlarmId() {
+        return alarmId;
+    }
+
+    public void setAlarmId(int alarmId) {
+        this.alarmId = alarmId;
     }
 
     public List<Long> getIds() {
@@ -109,7 +119,7 @@ public class MedicineAlarm implements Comparable<MedicineAlarm> {
         this.minute = minute;
     }
 
-    public String getAm_pm() {
+    private String getAm_pm() {
         return (hour < 12) ? "am" : "pm";
     }
 

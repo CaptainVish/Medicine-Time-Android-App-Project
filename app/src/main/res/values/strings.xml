@@ -10,7 +10,8 @@
     <string name="every_day">Every day</string>
     <string name="no_medicine_added">No Medicine Added</string>
     <string name="loading_tasks_error">Error while loading medicineAlarms</string>
-    <string name="successfully_saved_me_message">Medicine Added Scuccessfully</string>
+    <string name="successfully_saved_me_message">Medicine Added Successfully</string>
+    <string name="successfully_deleted_message">Medicine deleted Successfully</string>
     <string name="reminder_message">It\'s Time to take your medicine</string>
     <string name="ignored">IGNORED</string>
     <string name="taken">TAKEN</string>

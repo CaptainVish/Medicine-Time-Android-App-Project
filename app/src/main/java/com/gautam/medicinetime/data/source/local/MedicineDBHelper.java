@@ -60,6 +60,7 @@ public class MedicineDBHelper extends SQLiteOpenHelper {
     private static final String KEY_ALARMS_PILL_NAME = "pillName";
     private static final String KEY_DOSE_QUANTITY = "dose_quantity";
     private static final String KEY_DOSE_UNITS = "dose_units";
+    private static final String KEY_ALARM_ID = "alarm_id";
 
 
     /**
@@ -88,7 +89,7 @@ public class MedicineDBHelper extends SQLiteOpenHelper {
     private static final String CREATE_ALARM_TABLE =
             "create table " + ALARM_TABLE + "("
                     + KEY_ROWID + " integer primary key,"
-                    + KEY_INTENT + " text,"
+                    + KEY_ALARM_ID + " integer,"
                     + KEY_HOUR + " integer,"
                     + KEY_MINUTE + " integer,"
                     + KEY_ALARMS_PILL_NAME + " text not null,"
@@ -110,15 +111,7 @@ public class MedicineDBHelper extends SQLiteOpenHelper {
      * Histories Table: create statement
      */
     private static final String CREATE_HISTORIES_TABLE =
-            "CREATE TABLE " + HISTORIES_TABLE + "("
-                    + KEY_ROWID + " integer primary key, "
-                    + KEY_PILLNAME + " text not null, "
-                    + KEY_DOSE_QUANTITY + " text,"
-                    + KEY_DOSE_UNITS + " text,"
-                    + KEY_DATE_STRING + " text, "
-                    + KEY_HOUR + " integer, "
-                    + KEY_ACTION + " integer, "
-                    + KEY_MINUTE + " integer " + ")";
+            String.format("CREATE TABLE %s(%s integer primary key, %s text not null, %s text, %s text, %s text, %s integer, %s integer, %s integer , %s integer)", HISTORIES_TABLE, KEY_ROWID, KEY_PILLNAME, KEY_DOSE_QUANTITY, KEY_DOSE_UNITS, KEY_DATE_STRING, KEY_HOUR, KEY_ACTION, KEY_MINUTE, KEY_ALARM_ID);
 
     /**
      * Constructor
@@ -188,6 +181,7 @@ public class MedicineDBHelper extends SQLiteOpenHelper {
                 values.put(KEY_DOSE_QUANTITY, alarm.getDoseQuantity());
                 values.put(KEY_DOSE_UNITS, alarm.getDoseUnit());
                 values.put(KEY_DATE_STRING, alarm.getDateString());
+                values.put(KEY_ALARM_ID, alarm.getAlarmId());
 
                 /** Insert row */
                 long alarm_id = db.insert(ALARM_TABLE, null, values);
@@ -233,6 +227,7 @@ public class MedicineDBHelper extends SQLiteOpenHelper {
         values.put(KEY_DOSE_QUANTITY, history.getDoseQuantity());
         values.put(KEY_DOSE_UNITS, history.getDoseUnit());
         values.put(KEY_ACTION, history.getAction());
+        values.put(KEY_ALARM_ID, history.getAlarmId());
 
         /** Insert row */
         db.insert(HISTORIES_TABLE, null, values);
@@ -328,6 +323,7 @@ public class MedicineDBHelper extends SQLiteOpenHelper {
                 al.setDoseQuantity(c.getString(c.getColumnIndex(KEY_DOSE_QUANTITY)));
                 al.setDoseUnit(c.getString(c.getColumnIndex(KEY_DOSE_UNITS)));
                 al.setDateString(c.getString(c.getColumnIndex(KEY_DATE_STRING)));
+                al.setAlarmId(c.getInt(c.getColumnIndex(KEY_ALARM_ID)));
 
                 alarmsByPill.add(al);
             } while (c.moveToNext());
@@ -337,6 +333,45 @@ public class MedicineDBHelper extends SQLiteOpenHelper {
 
 
         return combineAlarms(alarmsByPill);
+    }
+
+    public List<MedicineAlarm> getAllAlarms(String pillName) throws URISyntaxException {
+        List<MedicineAlarm> alarmsByPill = new ArrayList<>();
+
+        /** HINT: When reading string: '.' are not periods ex) pill.rowIdNumber */
+        String selectQuery = "SELECT * FROM " +
+                ALARM_TABLE + " alarm, " +
+                PILL_TABLE + " pill, " +
+                PILL_ALARM_LINKS + " pillAlarm WHERE " +
+                "pill." + KEY_PILLNAME + " = '" + pillName + "'" +
+                " AND pill." + KEY_ROWID + " = " +
+                "pillAlarm." + KEY_PILLTABLE_ID +
+                " AND alarm." + KEY_ROWID + " = " +
+                "pillAlarm." + KEY_ALARMTABLE_ID;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery(selectQuery, null);
+
+        if (c.moveToFirst()) {
+            do {
+                MedicineAlarm al = new MedicineAlarm();
+                al.setId(c.getInt(c.getColumnIndex(KEY_ROWID)));
+                al.setHour(c.getInt(c.getColumnIndex(KEY_HOUR)));
+                al.setMinute(c.getInt(c.getColumnIndex(KEY_MINUTE)));
+                al.setPillName(c.getString(c.getColumnIndex(KEY_ALARMS_PILL_NAME)));
+                al.setDoseQuantity(c.getString(c.getColumnIndex(KEY_DOSE_QUANTITY)));
+                al.setDoseUnit(c.getString(c.getColumnIndex(KEY_DOSE_UNITS)));
+                al.setDateString(c.getString(c.getColumnIndex(KEY_DATE_STRING)));
+                al.setAlarmId(c.getInt(c.getColumnIndex(KEY_ALARM_ID)));
+
+                alarmsByPill.add(al);
+            } while (c.moveToNext());
+        }
+
+        c.close();
+
+
+        return alarmsByPill;
     }
 
     /**
@@ -367,7 +402,7 @@ public class MedicineDBHelper extends SQLiteOpenHelper {
                 al.setDoseQuantity(c.getString(c.getColumnIndex(KEY_DOSE_QUANTITY)));
                 al.setDoseUnit(c.getString(c.getColumnIndex(KEY_DOSE_UNITS)));
                 al.setDateString(c.getString(c.getColumnIndex(KEY_DATE_STRING)));
-
+                al.setAlarmId(c.getInt(c.getColumnIndex(KEY_ALARM_ID)));
                 daysAlarms.add(al);
             } while (c.moveToNext());
         }
@@ -401,7 +436,7 @@ public class MedicineDBHelper extends SQLiteOpenHelper {
         al.setDoseQuantity(c.getString(c.getColumnIndex(KEY_DOSE_QUANTITY)));
         al.setDoseUnit(c.getString(c.getColumnIndex(KEY_DOSE_UNITS)));
         al.setDateString(c.getString(c.getColumnIndex(KEY_DATE_STRING)));
-
+        al.setAlarmId(c.getInt(c.getColumnIndex(KEY_ALARM_ID)));
         c.close();
 
         return al;
@@ -441,7 +476,7 @@ public class MedicineDBHelper extends SQLiteOpenHelper {
                 newAlarm.setHour(al.getHour());
                 newAlarm.addId(al.getId());
                 newAlarm.setDateString(al.getDateString());
-
+                newAlarm.setAlarmId(al.getAlarmId());
                 int day = getDayOfWeek(al.getId());
                 days[day - 1] = true;
                 newAlarm.setDayOfWeek(days);
@@ -499,6 +534,7 @@ public class MedicineDBHelper extends SQLiteOpenHelper {
                 h.setDoseQuantity(c.getString(c.getColumnIndex(KEY_DOSE_QUANTITY)));
                 h.setDoseUnit(c.getString(c.getColumnIndex(KEY_DOSE_UNITS)));
                 h.setAction(c.getInt(c.getColumnIndex(KEY_ACTION)));
+                h.setAlarmId(c.getInt(c.getColumnIndex(KEY_ALARM_ID)));
 
                 allHistory.add(h);
             } while (c.moveToNext());

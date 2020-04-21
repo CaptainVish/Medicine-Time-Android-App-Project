@@ -33,7 +33,6 @@ public interface MedicineDataSource {
 
     void getMedicineAlarmById(long id, GetTaskCallback callback);
 
-
     void saveMedicine(MedicineAlarm medicineAlarm, Pills pills);
 
     void getMedicineListByDay(int day, LoadMedicineCallbacks callbacks);
@@ -45,6 +44,8 @@ public interface MedicineDataSource {
     void deleteAlarm(long alarmId);
 
     List<MedicineAlarm> getMedicineByPillName(String pillName);
+
+    List<MedicineAlarm> getAllAlarms(String pillName);
 
     Pills getPillsByName(String pillName);
 

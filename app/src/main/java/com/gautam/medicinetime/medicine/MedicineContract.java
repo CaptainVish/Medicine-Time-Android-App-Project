@@ -1,12 +1,11 @@
 package com.gautam.medicinetime.medicine;
 
-import android.support.annotation.NonNull;
+import android.content.Context;
 
 import com.gautam.medicinetime.BasePresenter;
 import com.gautam.medicinetime.BaseView;
 import com.gautam.medicinetime.data.source.MedicineAlarm;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -31,6 +30,8 @@ public interface MedicineContract {
 
         void showSuccessfullySavedMessage();
 
+        void  showMedicineDeletedSuccessfully();
+
         boolean isActive();
 
 
@@ -46,6 +47,7 @@ public interface MedicineContract {
 
         void loadMedicinesByDay(int day, boolean showIndicator);
 
+        void deleteMedicineAlarm(MedicineAlarm medicineAlarm, Context context);
 
         void addNewMedicine();
 

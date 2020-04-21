@@ -97,6 +97,16 @@ public class MedicinesLocalDataSource implements MedicineDataSource {
     }
 
     @Override
+    public List<MedicineAlarm> getAllAlarms(String pillName) {
+        try {
+            return getAllAlarmsByName(pillName);
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
     public Pills getPillsByName(String pillName) {
         return getPillByName(pillName);
     }
@@ -127,6 +137,10 @@ public class MedicinesLocalDataSource implements MedicineDataSource {
 
     private List<MedicineAlarm> getMedicineByPill(String pillName) throws URISyntaxException {
         return mDbHelper.getAllAlarmsByPill(pillName);
+    }
+
+    private List<MedicineAlarm> getAllAlarmsByName(String pillName) throws URISyntaxException {
+        return mDbHelper.getAllAlarms(pillName);
     }
 
     public void deletePill(String pillName) throws URISyntaxException {

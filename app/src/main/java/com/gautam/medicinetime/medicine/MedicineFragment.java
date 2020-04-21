@@ -3,12 +3,17 @@ package com.gautam.medicinetime.medicine;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.annotation.Nullable;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
+
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +29,7 @@ import com.gautam.medicinetime.views.RobotoLightTextView;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -34,12 +40,13 @@ import butterknife.Unbinder;
  * Created by gautam on 13/07/17.
  */
 
-public class MedicineFragment extends Fragment implements MedicineContract.View {
+public class MedicineFragment extends Fragment implements MedicineContract.View, MedicineAdapter.OnItemClickListener {
 
     @BindView(R.id.medicine_list)
     RecyclerView rvMedList;
 
     Unbinder unbinder;
+
     @BindView(R.id.noMedIcon)
     ImageView noMedIcon;
 
@@ -75,7 +82,7 @@ public class MedicineFragment extends Fragment implements MedicineContract.View 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        medicineAdapter = new MedicineAdapter(new ArrayList<MedicineAlarm>(0));
+        medicineAdapter = new MedicineAdapter(new ArrayList<>(0));
     }
 
     @Nullable
@@ -90,20 +97,16 @@ public class MedicineFragment extends Fragment implements MedicineContract.View 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        FloatingActionButton fab = (FloatingActionButton) getActivity().findViewById(R.id.fab_add_task);
+        FloatingActionButton fab = Objects.requireNonNull(getActivity()).findViewById(R.id.fab_add_task);
         fab.setImageResource(R.drawable.ic_add);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                presenter.addNewMedicine();
-            }
-        });
+        fab.setOnClickListener(v -> presenter.addNewMedicine());
     }
 
     private void setAdapter() {
         rvMedList.setAdapter(medicineAdapter);
         rvMedList.setLayoutManager(new LinearLayoutManager(getContext()));
         rvMedList.setHasFixedSize(true);
+        medicineAdapter.setOnItemClickListener(this);
     }
 
     @Override
@@ -158,14 +161,21 @@ public class MedicineFragment extends Fragment implements MedicineContract.View 
     @Override
     public void showNoMedicine() {
         showNoTasksViews(
-                getResources().getString(R.string.no_medicine_added),
-                R.drawable.icon_my_health
+                getResources().getString(R.string.no_medicine_added)
         );
     }
 
     @Override
     public void showSuccessfullySavedMessage() {
         showMessage(getString(R.string.successfully_saved_me_message));
+    }
+
+    @Override
+    public void showMedicineDeletedSuccessfully() {
+        showMessage(getString(R.string.successfully_deleted_message));
+        Calendar calendar = Calendar.getInstance();
+        int day = calendar.get(Calendar.DAY_OF_WEEK);
+        presenter.onStart(day);
     }
 
     private void showMessage(String message) {
@@ -189,17 +199,22 @@ public class MedicineFragment extends Fragment implements MedicineContract.View 
         showAddMedicine();
     }
 
-    private void showNoTasksViews(String mainText, int iconRes) {
+    private void showNoTasksViews(String mainText) {
         rvMedList.setVisibility(View.GONE);
         noMedView.setVisibility(View.VISIBLE);
         noMedText.setText(mainText);
-        noMedIcon.setImageDrawable(getResources().getDrawable(iconRes));
+        noMedIcon.setImageDrawable(getResources().getDrawable(R.drawable.icon_my_health));
         addMedNow.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         presenter.result(requestCode, resultCode);
+    }
+
+    @Override
+    public void onMedicineDeleteClicked(MedicineAlarm medicineAlarm) {
+        presenter.deleteMedicineAlarm(medicineAlarm, getActivity());
     }
 }
 

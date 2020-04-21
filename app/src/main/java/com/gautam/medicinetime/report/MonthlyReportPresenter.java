@@ -1,6 +1,6 @@
 package com.gautam.medicinetime.report;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.gautam.medicinetime.data.source.History;
 import com.gautam.medicinetime.data.source.MedicineDataSource;

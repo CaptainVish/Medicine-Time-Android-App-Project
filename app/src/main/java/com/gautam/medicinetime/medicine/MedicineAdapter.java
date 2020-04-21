@@ -1,6 +1,8 @@
 package com.gautam.medicinetime.medicine;
 
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +25,7 @@ import butterknife.ButterKnife;
 public class MedicineAdapter extends RecyclerView.Adapter<MedicineAdapter.MedicineViewHolder> {
 
     private List<MedicineAlarm> medicineAlarmList;
+    private OnItemClickListener onItemClickListener;
 
     public MedicineAdapter(List<MedicineAlarm> medicineAlarmList) {
         this.medicineAlarmList = medicineAlarmList;
@@ -33,6 +36,11 @@ public class MedicineAdapter extends RecyclerView.Adapter<MedicineAdapter.Medici
         notifyDataSetChanged();
     }
 
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
+
+    @NonNull
     @Override
     public MedicineViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_medicine, parent, false);
@@ -40,7 +48,7 @@ public class MedicineAdapter extends RecyclerView.Adapter<MedicineAdapter.Medici
     }
 
     @Override
-    public void onBindViewHolder(MedicineViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MedicineViewHolder holder, int position) {
         final MedicineAlarm medicineAlarm = medicineAlarmList.get(position);
         if (medicineAlarm == null) {
             return;
@@ -48,6 +56,15 @@ public class MedicineAdapter extends RecyclerView.Adapter<MedicineAdapter.Medici
         holder.tvMedTime.setText(medicineAlarm.getStringTime());
         holder.tvMedicineName.setText(medicineAlarm.getPillName());
         holder.tvDoseDetails.setText(medicineAlarm.getFormattedDose());
+        holder.ivAlarmDelete.setVisibility(View.VISIBLE);
+        holder.ivAlarmDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (onItemClickListener != null) {
+                    onItemClickListener.onMedicineDeleteClicked(medicineAlarm);
+                }
+            }
+        });
     }
 
     @Override
@@ -69,9 +86,16 @@ public class MedicineAdapter extends RecyclerView.Adapter<MedicineAdapter.Medici
         @BindView(R.id.iv_medicine_action)
         ImageView ivMedicineAction;
 
+        @BindView(R.id.iv_alarm_delete)
+        ImageView ivAlarmDelete;
+
         MedicineViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
+    }
+
+    interface OnItemClickListener {
+        void onMedicineDeleteClicked(MedicineAlarm medicineAlarm);
     }
 }

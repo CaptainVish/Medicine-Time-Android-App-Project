@@ -7,11 +7,11 @@ import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.AppCompatCheckBox;
-import android.support.v7.widget.AppCompatSpinner;
+import androidx.annotation.Nullable;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import androidx.fragment.app.Fragment;
+import androidx.appcompat.widget.AppCompatCheckBox;
+import androidx.appcompat.widget.AppCompatSpinner;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,6 +38,8 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
+import java.util.Random;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -98,11 +100,7 @@ public class AddMedicineFragment extends Fragment implements AddMedicineContract
 
     private List<String> doseUnitList;
 
-    private boolean dayOfWeekList[] = new boolean[7];
-
-    private AlarmManager alarmManager;
-
-    private PendingIntent operation;
+    private boolean[] dayOfWeekList = new boolean[7];
 
     private int hour, minute;
 
@@ -115,7 +113,7 @@ public class AddMedicineFragment extends Fragment implements AddMedicineContract
     private String doseUnit;
 
 
-    public static AddMedicineFragment newInstance() {
+    static AddMedicineFragment newInstance() {
         Bundle args = new Bundle();
         AddMedicineFragment fragment = new AddMedicineFragment();
         fragment.setArguments(args);
@@ -125,7 +123,7 @@ public class AddMedicineFragment extends Fragment implements AddMedicineContract
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        FloatingActionButton fab = (FloatingActionButton) getActivity().findViewById(R.id.fab_edit_task_done);
+        FloatingActionButton fab = Objects.requireNonNull(getActivity()).findViewById(R.id.fab_edit_task_done);
         fab.setImageResource(R.drawable.ic_done);
         fab.setOnClickListener(setClickListener);
     }
@@ -153,7 +151,7 @@ public class AddMedicineFragment extends Fragment implements AddMedicineContract
 
     @Override
     public void showMedicineList() {
-        getActivity().setResult(Activity.RESULT_OK);
+        Objects.requireNonNull(getActivity()).setResult(Activity.RESULT_OK);
         getActivity().finish();
     }
 
@@ -275,7 +273,7 @@ public class AddMedicineFragment extends Fragment implements AddMedicineContract
 
     private void setSpinnerDoseUnits() {
         doseUnitList = Arrays.asList(getResources().getStringArray(R.array.medications_shape_array));
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_dropdown_item_1line, doseUnitList);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(Objects.requireNonNull(getContext()), android.R.layout.simple_dropdown_item_1line, doseUnitList);
         spinnerDoseUnits.setAdapter(adapter);
     }
 
@@ -289,7 +287,7 @@ public class AddMedicineFragment extends Fragment implements AddMedicineContract
         Log.d("TAG", doseUnit);
     }
 
-    View.OnClickListener setClickListener = new View.OnClickListener() {
+    private View.OnClickListener setClickListener = new View.OnClickListener() {
 
         @Override
         public void onClick(View v) {
@@ -304,6 +302,7 @@ public class AddMedicineFragment extends Fragment implements AddMedicineContract
 
             /** Updating model */
             MedicineAlarm alarm = new MedicineAlarm();
+            int alarmId = new Random().nextInt(100);
 
             /** If Pill does not already exist */
             if (!mPresenter.isMedicineExits(pill_name)) {
@@ -316,6 +315,7 @@ public class AddMedicineFragment extends Fragment implements AddMedicineContract
                 alarm.setDayOfWeek(dayOfWeekList);
                 alarm.setDoseUnit(doseUnit);
                 alarm.setDoseQuantity(doseQuantity);
+                alarm.setAlarmId(alarmId);
                 pill.addAlarm(alarm);
                 long pillId = mPresenter.addPills(pill);
                 pill.setPillId(pillId);
@@ -329,6 +329,7 @@ public class AddMedicineFragment extends Fragment implements AddMedicineContract
                 alarm.setDayOfWeek(dayOfWeekList);
                 alarm.setDoseUnit(doseUnit);
                 alarm.setDoseQuantity(doseQuantity);
+                alarm.setAlarmId(alarmId);
                 pill.addAlarm(alarm);
                 mPresenter.saveMedicine(alarm, pill);
             }
@@ -358,10 +359,10 @@ public class AddMedicineFragment extends Fragment implements AddMedicineContract
                     Intent intent = new Intent(getActivity(), ReminderActivity.class);
                     intent.putExtra(ReminderFragment.EXTRA_ID, _id);
 
-                    operation = PendingIntent.getActivity(getActivity(), id, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                    PendingIntent operation = PendingIntent.getActivity(getActivity(), id, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
                     /** Getting a reference to the System Service ALARM_SERVICE */
-                    alarmManager = (AlarmManager) getActivity().getSystemService(ALARM_SERVICE);
+                    AlarmManager alarmManager = (AlarmManager) Objects.requireNonNull(getActivity()).getSystemService(ALARM_SERVICE);
 
                     /** Creating a calendar object corresponding to the date and time set by the user */
                     Calendar calendar = Calendar.getInstance();
@@ -378,6 +379,7 @@ public class AddMedicineFragment extends Fragment implements AddMedicineContract
                     if (calendar.before(Calendar.getInstance()))
                         alarm_time += AlarmManager.INTERVAL_DAY * 7;
 
+                    assert alarmManager != null;
                     alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, alarm_time,
                             AlarmManager.INTERVAL_DAY * 7, operation);
                 }

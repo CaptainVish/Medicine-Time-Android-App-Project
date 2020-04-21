@@ -2,18 +2,14 @@ package com.gautam.medicinetime.alarm;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import android.view.MenuItem;
-import android.widget.FrameLayout;
 
 import com.gautam.medicinetime.Injection;
 import com.gautam.medicinetime.R;
-import com.gautam.medicinetime.medicine.MedicineActivity;
-import com.gautam.medicinetime.medicine.MedicineFragment;
-import com.gautam.medicinetime.medicine.MedicinePresenter;
 import com.gautam.medicinetime.utils.ActivityUtils;
 
 import butterknife.BindView;
