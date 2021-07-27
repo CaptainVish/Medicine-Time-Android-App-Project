@@ -1,6 +1,6 @@
 # Add project specific ProGuard rules here.
 # By default, the flags in this file are appended to flags specified
-# in /Users/gautam/Library/Android/sdk/tools/proguard/proguard-android.txt
+# in /Users/vishwajeeth/Library/Android/sdk/tools/proguard/proguard-android.txt
 # You can edit the include path and order by changing the proguardFiles
 # directive in build.gradle.
 #
@@ -74,8 +74,8 @@
 }
 
 #Database table
--keep class com.gautam.medicinetime.data.**
--keepclassmembers class com.gautam.medicinetime.data.** { *; }
+-keep class com.vishwajeeth.medicinetime.data.**
+-keepclassmembers class com.vishwajeeth.medicinetime.data.** { *; }
 
 #ButterKnife
 -keep class butterknife.*

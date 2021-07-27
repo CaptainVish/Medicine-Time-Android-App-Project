@@ -13,7 +13,7 @@
         android:fitsSystemWindows="true"
         android:theme="@style/AppTheme.AppBarOverlay"
         app:expanded="false"
-        app:layout_behavior="com.gautam.medicinetime.utils.ScrollingCalendarBehavior">
+        app:layout_behavior="com.vishwajeeth.medicinetime.utils.ScrollingCalendarBehavior">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:id="@+id/collapsingToolbarLayout"

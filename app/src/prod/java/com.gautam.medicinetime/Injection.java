@@ -1,15 +1,15 @@
-package com.gautam.medicinetime;
+package com.vishwajeeth.medicinetime;
 
 import android.content.Context;
 import androidx.annotation.NonNull;
 
 
-import com.gautam.medicinetime.data.source.MedicineRepository;
-import com.gautam.medicinetime.data.source.local.MedicinesLocalDataSource;
+import com.vishwajeeth.medicinetime.data.source.MedicineRepository;
+import com.vishwajeeth.medicinetime.data.source.local.MedicinesLocalDataSource;
 
 
 /**
- * Created by gautam on 13/05/17.
+ * Created by vishwajeeth on 13/05/17.
  */
 
 public class Injection {

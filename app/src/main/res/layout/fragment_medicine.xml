@@ -31,7 +31,7 @@
             android:contentDescription="@null"
             android:src="@drawable/icon_my_health" />
 
-        <com.gautam.medicinetime.views.RobotoLightTextView
+        <com.vishwajeeth.medicinetime.views.RobotoLightTextView
             android:id="@+id/noMedText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

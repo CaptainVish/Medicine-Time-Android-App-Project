@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorAccent">#03a9f4</color>
-    <color name="colorPrimary">#2196f3</color>
-    <color name="colorPrimaryDark">#1976d2</color>
+    <color name="colorAccent">#F40303</color>
+    <color name="colorPrimary">#F32121</color>
+    <color name="colorPrimaryDark">#D21919</color>
 
     <color name="color_light_grey">#4d4d4d</color>
+    <color name="splashBackground">#FAF7F7</color>
 
     <drawable name="touchFeedback">#CFD8DC</drawable>
 </resources>

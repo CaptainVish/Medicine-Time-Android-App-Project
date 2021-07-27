@@ -5,14 +5,14 @@ android {
         config {
             keyAlias 'medicine'
             keyPassword 'test123'
-            storeFile file('/Users/gautam/Documents/Projects/MedicineTime/app/medicine')
+            storeFile file('/Users/vishwajeeth/Documents/Projects/MedicineTime/app/medicine')
             storePassword 'test123'
         }
     }
     compileSdkVersion 29
     buildToolsVersion '29.0.3'
     defaultConfig {
-        applicationId "com.gautam.medicinetime"
+        applicationId "com.vishwajeeth.medicinetime"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
@@ -31,7 +31,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.config
             pseudoLocalesEnabled true
-            proguardFile '/Users/gautam/Documents/Projects/MedicineTime/app/proguard-rules.pro'
+            proguardFile '/Users/vishwajeeth/Documents/Projects/MedicineTime/app/proguard-rules.pro'
         }
     }
     flavorDimensions "default"

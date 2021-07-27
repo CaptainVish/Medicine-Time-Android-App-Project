@@ -25,7 +25,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <com.gautam.medicinetime.views.RobotoBoldTextView
+                <com.vishwajeeth.medicinetime.views.RobotoBoldTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/title_medicine_name"
@@ -55,7 +55,7 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <com.gautam.medicinetime.views.RobotoBoldTextView
+                <com.vishwajeeth.medicinetime.views.RobotoBoldTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/medicine_days"
@@ -76,7 +76,7 @@
                     android:orientation="horizontal"
                     android:weightSum="7">
 
-                    <com.gautam.medicinetime.views.DayViewCheckBox
+                    <com.vishwajeeth.medicinetime.views.DayViewCheckBox
                         android:id="@+id/dv_sunday"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
@@ -87,7 +87,7 @@
                         android:gravity="center"
                         android:text="S" />
 
-                    <com.gautam.medicinetime.views.DayViewCheckBox
+                    <com.vishwajeeth.medicinetime.views.DayViewCheckBox
                         android:id="@+id/dv_monday"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
@@ -99,7 +99,7 @@
                         android:text="M" />
 
 
-                    <com.gautam.medicinetime.views.DayViewCheckBox
+                    <com.vishwajeeth.medicinetime.views.DayViewCheckBox
                         android:id="@+id/dv_tuesday"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
@@ -110,7 +110,7 @@
                         android:gravity="center"
                         android:text="T" />
 
-                    <com.gautam.medicinetime.views.DayViewCheckBox
+                    <com.vishwajeeth.medicinetime.views.DayViewCheckBox
                         android:id="@+id/dv_wednesday"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
@@ -121,7 +121,7 @@
                         android:gravity="center"
                         android:text="W" />
 
-                    <com.gautam.medicinetime.views.DayViewCheckBox
+                    <com.vishwajeeth.medicinetime.views.DayViewCheckBox
                         android:id="@+id/dv_thursday"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
@@ -132,7 +132,7 @@
                         android:gravity="center"
                         android:text="T" />
 
-                    <com.gautam.medicinetime.views.DayViewCheckBox
+                    <com.vishwajeeth.medicinetime.views.DayViewCheckBox
                         android:id="@+id/dv_friday"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
@@ -144,7 +144,7 @@
                         android:text="F" />
 
 
-                    <com.gautam.medicinetime.views.DayViewCheckBox
+                    <com.vishwajeeth.medicinetime.views.DayViewCheckBox
                         android:id="@+id/dv_saturday"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
@@ -173,7 +173,7 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <com.gautam.medicinetime.views.RobotoBoldTextView
+                <com.vishwajeeth.medicinetime.views.RobotoBoldTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/title_reminder"
@@ -185,7 +185,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <com.gautam.medicinetime.views.RobotoBoldTextView
+                    <com.vishwajeeth.medicinetime.views.RobotoBoldTextView
                         android:id="@+id/tv_medicine_time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

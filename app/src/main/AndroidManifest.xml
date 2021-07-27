@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.gautam.medicinetime">
+    package="com.vishwajeeth.medicinetime">
 
     <uses-permission android:name="android.permission.VIBRATE" />
 
@@ -11,7 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".medicine.MedicineActivity">
+        <activity android:name="com.vishwajeeth.medicinetime.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,9 +19,10 @@
             </intent-filter>
         </activity>
         <!-- <activity android:name=".MainActivity" /> -->
-        <activity android:name=".addmedicine.AddMedicineActivity" />
-        <activity android:name=".alarm.ReminderActivity" />
-        <activity android:name=".report.MonthlyReportActivity"/>
+        <activity android:name="com.vishwajeeth.medicinetime.medicine.MedicineActivity" />
+        <activity android:name="com.vishwajeeth.medicinetime.addmedicine.AddMedicineActivity" />
+        <activity android:name="com.vishwajeeth.medicinetime.alarm.ReminderActivity" />
+        <activity android:name="com.vishwajeeth.medicinetime.report.MonthlyReportActivity"/>
     </application>
 
 </manifest>

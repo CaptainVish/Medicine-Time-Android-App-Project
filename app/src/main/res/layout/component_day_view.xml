@@ -7,7 +7,7 @@
     android:background="@drawable/background_day_view"
     android:orientation="vertical">
 
-    <com.gautam.medicinetime.views.RobotoBoldTextView
+    <com.vishwajeeth.medicinetime.views.RobotoBoldTextView
         android:id="@+id/weekDayTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

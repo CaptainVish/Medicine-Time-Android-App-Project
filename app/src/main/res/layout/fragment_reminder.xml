@@ -23,7 +23,7 @@
             android:paddingRight="@dimen/sixteen_dp"
             android:paddingTop="@dimen/sixteen_dp">
 
-            <com.gautam.medicinetime.views.RobotoBoldTextView
+            <com.vishwajeeth.medicinetime.views.RobotoBoldTextView
                 android:id="@+id/tv_med_time"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -68,14 +68,14 @@
                 android:orientation="vertical"
                 android:padding="4dp">
 
-                <com.gautam.medicinetime.views.RobotoBoldTextView
+                <com.vishwajeeth.medicinetime.views.RobotoBoldTextView
                     android:id="@+id/tv_medicine_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     tools:text="Paracetamol"
                     android:textColor="#4d4d4d" />
 
-                <com.gautam.medicinetime.views.RobotoRegularTextView
+                <com.vishwajeeth.medicinetime.views.RobotoRegularTextView
                     android:id="@+id/tv_dose_details"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
